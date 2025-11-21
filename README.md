@@ -1,62 +1,93 @@
-# Generative Adversarial Network (GAN)
+GAN (karthikeyan-2023/GAN)
 
-This repository contains a simple and educational implementation of a Generative Adversarial Network (GAN) using PyTorch. It demonstrates how to build a generator and discriminator, train them adversarially, and generate 28×28 grayscale images.
+This repository implements a simple but instructive Generative Adversarial Network (GAN) using PyTorch for generating 28×28 grayscale image data. The goal is to provide a clear, runnable example of a GAN workflow: model definitions, training loop, and sample generation.
 
----
+Features
 
-## Features
+Fully-defined Generator and Discriminator networks in PyTorch.
 
-- Fully implemented Generator and Discriminator in PyTorch  
-- Complete training loop for adversarial learning  
-- Random noise → generated images pipeline  
-- Visual outputs to monitor training progress  
-- Easy-to-tweak hyperparameters (z-dim, LR, epochs, batch size, etc.)
+Training loop that alternately updates Discriminator and Generator on real and fake images.
 
----
+Use of a latent noise vector (z) to generate synthetic images.
 
-## Project Structure
-GAN/
-├── GAN.ipynb # Main notebook with model and training code
-└── README.md # Documentation (this file)
+Visualization of generated samples after training (28×28 grayscale).
 
+Easily configurable hyperparameters: latent dimension, epochs, learning rate, batch size, etc.
 
+Project Structure
+GAN/  
+├── GAN.ipynb                # Jupyter Notebook with full training and sample generation  
+├── (optional) models.py      # (If present) defines generator & discriminator modules  
+├── (optional) utils.py       # (If present) utility functions for data loading / plotting  
+└── README.md                # This file  
 
-**Clone the repo:**
+Requirements
+
+Python 3.8 or higher
+
+PyTorch (compatible version)
+
+torchvision
+
+matplotlib (for plotting samples)
+
+jupyter (if you use the notebook)
+
+Install dependencies:
+
+pip install torch torchvision matplotlib jupyter
+
+Usage
+
+Clone the repository:
 
 git clone https://github.com/karthikeyan-2023/GAN.git
 cd GAN
 
 
-**Launch the notebook:**
+Launch the notebook:
 
 jupyter notebook GAN.ipynb
 
 
-Run all cells in order to:
+Execute the cells in order.
+The notebook includes sections for:
 
-Build models
+defining the networks
 
-**Load dataset**
+preparing the dataset (e.g., MNIST)
 
-Train GAN
+training the GAN
 
-Generate sample images
+displaying generated images at intervals
+
+analysis of results (loss curves, sample images)
+
+After training, inspect the “Generated Samples” section to view examples of the Generator’s output.
 
 How It Works
-**Generator**
+Generator
 
-Takes a noise vector and transforms it into a 28×28 grayscale image.
+Takes random noise vector z ∈ ℝ^z_dim as input and outputs a 28×28 image via a sequence of fully-connected (or maybe convolutional) layers.
 
-**Discriminator**
+Discriminator
 
-Evaluates images (real or fake) and outputs a probability of authenticity.
+Takes a 28×28 image (either real from the dataset or fake from the Generator) and outputs a scalar probability of being real vs. fake.
 
-****Trainin**g**
+Training Loop
 
-The Discriminator learns to detect real vs. fake, and the Generator learns to fool the Discriminator.
-This adversarial process gradually improves the generated images.
-**
-Results**
+Load real images batch from the dataset.
 
-After sufficient training, the Generator will begin producing digit-like images (if using MNIST).
-GANs can be unstable, so results vary — but this notebook provides a clear, hands-on introduction
+Sample noise vectors and generate fake images via the Generator.
+
+Train Discriminator to distinguish real vs. fake.
+
+Train Generator to fool the Discriminator (i.e., maximize the probability that Discriminator labels fake as real).
+
+Repeat for multiple epochs.
+
+Periodically save and display generated samples and optionally track losses for both models.
+
+Results & Expectations
+
+With a proper number of epochs (e.g., 50–200), you should expect the Generator to gradually produce images that look more like the training data (digits, if using MNIST). The Discriminator loss tends to fluctuate as the two networks compete; mode collapse and instability are possible—this implementation is intended for educational purposes, not state-of-the-art image synthesis.
