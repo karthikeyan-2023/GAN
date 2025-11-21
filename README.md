@@ -19,15 +19,15 @@ GAN/
 ├── GAN.ipynb # Main notebook with model and training code
 └── README.md # Documentation (this file)
 
-Usage
 
-Clone the repo:
+
+**Clone the repo:**
 
 git clone https://github.com/karthikeyan-2023/GAN.git
 cd GAN
 
 
-Launch the notebook:
+**Launch the notebook:**
 
 jupyter notebook GAN.ipynb
 
@@ -36,27 +36,27 @@ Run all cells in order to:
 
 Build models
 
-Load dataset
+**Load dataset**
 
 Train GAN
 
 Generate sample images
 
 How It Works
-Generator
+**Generator**
 
 Takes a noise vector and transforms it into a 28×28 grayscale image.
 
-Discriminator
+**Discriminator**
 
 Evaluates images (real or fake) and outputs a probability of authenticity.
 
-Training
+****Trainin**g**
 
 The Discriminator learns to detect real vs. fake, and the Generator learns to fool the Discriminator.
 This adversarial process gradually improves the generated images.
-
-Results
+**
+Results**
 
 After sufficient training, the Generator will begin producing digit-like images (if using MNIST).
 GANs can be unstable, so results vary — but this notebook provides a clear, hands-on introduction
